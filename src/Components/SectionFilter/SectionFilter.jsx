@@ -36,7 +36,7 @@ const SectionFilter = () => {
             if (max_price) params.max_price = max_price;
             console.log(params);
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/apartment/list/', { params });
+                const response = await axios.get('https://findyourapartmentbackend.onrender.com/api/apartment/list/', { params });
                 console.log(response.data);
                 setDisplayApartments(response.data);
             } catch (error) {

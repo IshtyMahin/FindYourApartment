@@ -5,17 +5,17 @@ import axios from 'axios';
 import AuthContext from '../../UseContext/UserProvider';
 
 const FavoriteApartments = () => {
-    const { user } = useContext(AuthContext);
+    const { user, allApartment, setAllApartment } = useContext(AuthContext);
     
     const [favoriteApartments, setFavoriteApartments] = useState([]);
     useEffect(() => {
         const fetchFavoriteApartments = async () => {
             try {
-                const favoriteResponse = await axios.get(`http://127.0.0.1:8000/api/apartment/favorites/?user=${user.id}`);
+                const favoriteResponse = await axios.get(`https://findyourapartmentbackend.onrender.com/api/apartment/favorites/?user=${user.id}`);
                 const favoriteApartmentIds = favoriteResponse.data.map(favorite => favorite.apartment);
 
                 const apartmentDetailsPromises = favoriteApartmentIds.map(async apartmentId => {
-                    const response = await axios.get(`http://127.0.0.1:8000/api/apartment/list/${apartmentId}`);
+                    const response = await axios.get(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartmentId}`);
                     return response.data;
                 });
 
@@ -27,7 +27,7 @@ const FavoriteApartments = () => {
         };
 
         fetchFavoriteApartments();
-    }, [user.id]);
+    }, [user.id, allApartment]);
 
     console.log(favoriteApartments);
     return (

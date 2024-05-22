@@ -20,7 +20,7 @@ const ApartmentDetails = () => {
     const apartment_id = params.get('id');
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/apartment/list/${apartment_id}`)
+        fetch(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartment_id}`)
             .then(response => response.json())
             .then(data => {
                 setApartment(data);
@@ -33,7 +33,7 @@ const ApartmentDetails = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/apartment/favorites/?user=${user.id}&apartment=${apartment_id}`);
+                const response = await axios.get(`https://findyourapartmentbackend.onrender.com/api/apartment/favorites/?user=${user.id}&apartment=${apartment_id}`);
                 if (response.data.length > 0) {
                     setIsFavorite(true);
                  }
@@ -61,7 +61,7 @@ const ApartmentDetails = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://127.0.0.1:8000/api/apartment/list/${apartment_id}`)
+            await axios.delete(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartment_id}`)
             navigate('/')
             // console.log('its okay');
         } catch (error) {
@@ -71,14 +71,14 @@ const ApartmentDetails = () => {
 
     const toggleFavorite = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/apartment/favorites/?user=${user.id}&apartment=${apartment_id}`);
+            const response = await axios.get(`https://findyourapartmentbackend.onrender.com/api/apartment/favorites/?user=${user.id}&apartment=${apartment_id}`);
             console.log(response.data);
             if (response.data.length > 0) {
                 const favoriteId = response.data[0].id;
-                const deleteFav=await axios.delete(`http://127.0.0.1:8000/api/apartment/favorites/${favoriteId}`);
+                const deleteFav=await axios.delete(`https://findyourapartmentbackend.onrender.com/api/apartment/favorites/${favoriteId}`);
                 setIsFavorite(false);
             } else {
-                const addFav = await axios.post('http://127.0.0.1:8000/api/apartment/favorites/', {
+                const addFav = await axios.post('https://findyourapartmentbackend.onrender.com/api/apartment/favorites/', {
                     user: user.id,
                     apartment: apartment_id,
                 });

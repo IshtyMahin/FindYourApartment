@@ -34,6 +34,14 @@ const ProfileCard = () => {
                         <p className="text-gray-600">{user.username}</p>
                     </div>
                     <div className='border-2 p-2 rounded-xl'>
+                        <h2 className="text-2xl font-bold">FirstName:</h2>
+                        <p className="text-gray-600">{user.first_name}</p>
+                    </div>
+                    <div className='border-2 p-2 rounded-xl'>
+                        <h2 className="text-2xl font-bold">LastName:</h2>
+                        <p className="text-gray-600">{user.last_name}</p>
+                    </div>
+                    <div className='border-2 p-2 rounded-xl'>
                         <h2 className="text-2xl font-bold">Email:</h2>
                         <p className="text-gray-600">{user.email}</p>
                     </div>

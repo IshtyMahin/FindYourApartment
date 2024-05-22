@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
         if (token) {
             console.log('Token from localStorage:', token);
-            axios.get('http://127.0.0.1:8000/api/users/verify-token/', {
+            axios.get('https://findyourapartmentbackend.onrender.com/api/users/verify-token/', {
                 headers: {
                     'Authorization': `Token ${token}`
                 }
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
     const fetchApartmentList = () => {
         
-        axios.get('http://127.0.0.1:8000/api/apartment/list/')
+        axios.get('https://findyourapartmentbackend.onrender.com/api/apartment/list/')
             .then(response => {
                 setAllApartment(response.data);
             })

@@ -12,6 +12,7 @@ const RegisterForm = () => {
         password: '',
         confirm_password: '',
     });
+    const [showModel, setShowModel] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,12 +25,17 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/users/register/', formData);
+            const response = await axios.post('https://findyourapartmentbackend.onrender.com/api/users/register/', formData);
             console.log(response);
+            setShowModel(true)
             console.log('its  okay', response.data);
         } catch (error) {
             console.error('error', error.response.data);
         }
+    };
+
+    const handleCloseModal = () => {
+        setShowModel(false);
     };
 
     return (
@@ -139,6 +145,21 @@ const RegisterForm = () => {
                     <button type="submit" className="btn btn-primary">Register</button>
                 </div>
             </form>
+
+            {showModel && (
+                <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 z-50 flex justify-center items-center">
+                    <div className="bg-white p-8 rounded-lg shadow-xl">
+                        <h2 className="text-2xl font-bold mb-4">Registration Successful</h2>
+                        <p className="mb-2">Your registration has been successfully completed!</p>
+                        <p className='mb-4'>Please Check your email for verification <a className='text-blue-600  ' href="https://mail.google.com/mail/u/0/#inbox">Click Here</a></p>
+                        <div className='grid grid-col-1'>
+                            
+
+                            <button onClick={handleCloseModal} className="btn btn-primary ">Close</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

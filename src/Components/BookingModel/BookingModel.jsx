@@ -9,7 +9,7 @@ const BookingModal = ({ apartment_id, onClose, onSuccess }) => {
 
     const handleBooking = async () => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/apartment/bookings/', {
+            const response = await axios.post('https://findyourapartmentbackend.onrender.com/api/apartment/bookings/', {
                 user: user.id,
                 apartment: apartment_id,
                 bookingDateTime,

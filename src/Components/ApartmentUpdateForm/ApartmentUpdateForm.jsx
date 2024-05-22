@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const ApartmentUpdateForm = () => {
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
+    const { user ,} = useContext(AuthContext);
     const [apartment, setApartment] = useState(null);
     const [formData, setFormData] = useState({
         price: '',
@@ -26,7 +26,7 @@ const ApartmentUpdateForm = () => {
     const apartment_id = params.get('id');
     console.log(apartment_id);
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/apartment/list/${apartment_id}`)
+        fetch(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartment_id}`)
             .then(response => response.json())
             .then(data => {
                 setApartment(data);
@@ -90,7 +90,7 @@ const ApartmentUpdateForm = () => {
         console.log(postData);
 
         try {
-            const response = await axios.put(`http://127.0.0.1:8000/api/apartment/list/${apartment_id}/`, postData, {
+            const response = await axios.put(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartment_id}/`, postData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

@@ -6,7 +6,7 @@ const MainSection = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/apartment/list/')
+        fetch('https://findyourapartmentbackend.onrender.com/api/apartment/list/')
             .then(response => response.json())
             .then(data => {
                 setApartments(data);

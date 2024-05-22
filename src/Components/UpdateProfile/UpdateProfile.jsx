@@ -19,7 +19,7 @@ const UpdateProfile = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/users/list/${user.id}`);
+            const response = await axios.get(`https://findyourapartmentbackend.onrender.com/api/users/list/${user.id}`);
             const userData = response.data;
             setFormData({
                 username: userData.username,
@@ -46,7 +46,7 @@ const UpdateProfile = () => {
         e.preventDefault();
         console.log(formData);
         try {
-            const res =await axios.put(`http://127.0.0.1:8000/api/users/update/${user.id}/`, formData);
+            const res =await axios.put(`https://findyourapartmentbackend.onrender.com/api/users/update/${user.id}/`, formData);
             console.log(res);
             setUser(res.data)
             console.log('User information updated successfully');
@@ -61,17 +61,7 @@ const UpdateProfile = () => {
                 <h2 className="text-2xl font-bold mb-6 text-center">Update Profile</h2>
 
                 <div className='grid md:grid-cols-2 gap-4'>
-                    <div className="mb-4">
-                        <label className="block text-gray-700">Username:</label>
-                        <input
-                            type="text"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            className="input input-bordered w-full"
-                            required
-                        />
-                    </div>
+                    
 
                     <div className="mb-4">
                         <label className="block text-gray-700">First Name:</label>

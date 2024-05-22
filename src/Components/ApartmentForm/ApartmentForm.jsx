@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import AuthContext from '../../UseContext/UserProvider';
+import { useNavigate } from 'react-router-dom';
 
 const ApartmentForm = () => {
     
     const { user, allApartment, setAllApartment } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         price: '',
         address: '',
@@ -50,13 +52,14 @@ const ApartmentForm = () => {
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/apartment/list/', postData, {
+            const response = await axios.post('https://findyourapartmentbackend.onrender.com/api/apartment/list/', postData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
-            setAllApartment(...allApartment,response.data)
+            setAllApartment(...allApartment, response.data)
+            navigate('/')
             console.log('its okay:', response.data);
         } catch (error) {
             console.error('error', error);

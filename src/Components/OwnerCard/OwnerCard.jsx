@@ -1,14 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../UseContext/UserProvider";
 import DetailCard from "../DetailCard/DetailCard";
 
 const OwnerCard = () => {
     const { user, allApartment } = useContext(AuthContext);
 
-    if (!user) {
-        return <span className="loading loading-spinner loading-lg"></span>;
-    }
-    if (!allApartment) {
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (user && allApartment) {
+            setIsLoading(false);
+        }
+    }, [user, allApartment]);
+
+    if (isLoading) {
         return <span className="loading loading-spinner loading-lg"></span>;
     }
 

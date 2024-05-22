@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const { user, loggedIn, login, logout } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -30,9 +30,9 @@ const LoginForm = () => {
             console.log(localStorage);
             login(response.data);
             navigate('/')
-            console.log('User logged in successfully:', response.data);
+            console.log('its okay', response.data);
         } catch (error) {
-            console.error('Error logging in user:', error.response.data);
+            console.error('error', error.response.data);
         }
     };
 

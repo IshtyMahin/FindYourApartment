@@ -43,7 +43,7 @@ const ApartmentUpdateForm = () => {
                 })
             })
             .catch(error => {
-                console.error('Error fetching apartment:', error);
+                console.error('error', error);
             });
     }, [apartment_id,user]);
 

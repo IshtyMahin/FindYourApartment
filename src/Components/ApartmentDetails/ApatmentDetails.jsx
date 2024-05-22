@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import AuthContext from '../../UseContext/UserProvider';
 import axios from 'axios';
+import BookingModal from '../BookingModel/BookingModel';
+import SuccessModal from '../ShowModel/ShowModel';
 
 const ApartmentDetails = () => {
     const { user } = useContext(AuthContext);
@@ -10,6 +12,8 @@ const ApartmentDetails = () => {
     const [apartment, setApartment] = useState(null);
     const [currentSlide, setCurrentSlide] = useState(0); 
     const [isFavorite, setIsFavorite] = useState(false);
+    const [showBookingModal, setShowBookingModal] = useState(false); 
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const { id } = useParams();
     const params = new URLSearchParams(id);
@@ -22,7 +26,7 @@ const ApartmentDetails = () => {
                 setApartment(data);
             })
             .catch(error => {
-                console.error('Error fetching apartment:', error);
+                console.error('error', error);
             });
     }, [apartment_id]);
 
@@ -35,7 +39,7 @@ const ApartmentDetails = () => {
                  }
 
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('error', error);
             }
         };
 
@@ -59,9 +63,9 @@ const ApartmentDetails = () => {
         try {
             await axios.delete(`http://127.0.0.1:8000/api/apartment/list/${apartment_id}`)
             navigate('/')
-            console.log('Apartment deleted successfully');
+            // console.log('its okay');
         } catch (error) {
-            console.error('Error deleting apartment:', error);
+            console.error('error', error);
         }
     };
 
@@ -118,11 +122,19 @@ const ApartmentDetails = () => {
                         <button onClick={toggleFavorite} className={`btn btn-accent flex items-center ${isFavorite ? 'btn-error' : 'btn-accent '}`}>
                             {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
                         </button>
-                    <button className="btn btn-primary flex items-center">
+                        <button onClick={() => setShowBookingModal(true)} className="btn btn-primary flex items-center">
                         Book Now
                     </button>
                 </div>}
             </div>
+            {showBookingModal && (
+                <BookingModal
+                    apartment_id={apartment.id}
+                    onClose={() => setShowBookingModal(false)}
+                    onSuccess={() => setShowSuccessModal(true)}
+                />
+            )}
+            {showSuccessModal && <SuccessModal onClose={() => setShowSuccessModal(false)} />}
         </div>
     );
 };

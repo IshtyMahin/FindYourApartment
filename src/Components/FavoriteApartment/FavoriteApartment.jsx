@@ -1,5 +1,4 @@
 
-import { Link, useParams } from 'react-router-dom';
 import DetailCard from '../DetailCard/DetailCard';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -23,7 +22,7 @@ const FavoriteApartments = () => {
                 const favoriteApartmentsDetails = await Promise.all(apartmentDetailsPromises);
                 setFavoriteApartments(favoriteApartmentsDetails);
             } catch (error) {
-                console.error('Error fetching favorite apartments:', error);
+                console.error('error', error);
             }
         };
 

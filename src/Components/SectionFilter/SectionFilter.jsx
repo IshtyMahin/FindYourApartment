@@ -40,10 +40,8 @@ const SectionFilter = () => {
                 console.log(response.data);
                 setDisplayApartments(response.data);
             } catch (error) {
-                console.error("Error fetching apartments", error);
-            } finally {
-                // setLoading(false);
-            }
+                console.error("error", error);
+            } 
         };
 
         fetchApartments();

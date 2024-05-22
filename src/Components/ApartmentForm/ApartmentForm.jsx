@@ -57,9 +57,9 @@ const ApartmentForm = () => {
             });
 
             setAllApartment(...allApartment,response.data)
-            console.log('Apartment created successfully:', response.data);
+            console.log('its okay:', response.data);
         } catch (error) {
-            console.error('Error creating apartment:', error);
+            console.error('error', error);
         }
     };
 

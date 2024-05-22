@@ -4,7 +4,7 @@ import AuthContext from '../../UseContext/UserProvider';
 import LoginModal from '../LoginModal/LoginModal';
 
 const FilterForm = () => {
-    const { user, loggedIn, login, logout } = useContext(AuthContext);
+    const {  loggedIn } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const [division, setDivision] = useState('');
     const [partialAddress, setPartialAddress] = useState('');

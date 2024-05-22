@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import SectionCard from '../SectionCard/SectionCard';
 
 const MainSection = () => {
@@ -13,7 +13,7 @@ const MainSection = () => {
                 setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching apartments:', error);
+                console.error('error', error);
                 setLoading(false);
             });
     }, []);

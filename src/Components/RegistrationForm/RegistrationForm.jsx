@@ -26,9 +26,9 @@ const RegisterForm = () => {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/users/register/', formData);
             console.log(response);
-            console.log('User registered successfully:', response.data);
+            console.log('its  okay', response.data);
         } catch (error) {
-            console.error('Error registering user:', error.response.data);
+            console.error('error', error.response.data);
         }
     };
 

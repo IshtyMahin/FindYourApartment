@@ -6,10 +6,10 @@ const OwnerCard = () => {
     const { user, allApartment } = useContext(AuthContext);
 
     if (!user) {
-        return <p>Loading user information...</p>;
+        return <span className="loading loading-spinner loading-lg"></span>;
     }
     if (!allApartment) {
-        return <p>Loading apartment information...</p>;
+        return <span className="loading loading-spinner loading-lg"></span>;
     }
 
     const ownerApartments = allApartment?.filter(apartment => apartment.owner_id === user.id);

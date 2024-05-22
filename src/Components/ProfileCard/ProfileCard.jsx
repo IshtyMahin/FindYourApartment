@@ -6,7 +6,7 @@ import UpdateProfile from '../UpdateProfile/UpdateProfile';
 
 const ProfileCard = () => {
     
-    const { user, setUser, loggedIn, login, logout } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [showFavoriteApartments, setShowFavoriteApartments] = useState(false);
     const [showUpdateForm, setshowUpdateForm] = useState(false);
 
@@ -22,7 +22,7 @@ const ProfileCard = () => {
     };
 
     if (!user) {
-        return <div>Loading...</div>;
+        return <span className="loading loading-spinner loading-lg"></span>;
     }
 
     return (

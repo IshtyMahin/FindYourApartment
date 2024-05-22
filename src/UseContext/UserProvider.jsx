@@ -5,7 +5,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [userDetails, setUserDetails] = useState(null);
     const [allApartment, setAllApartment] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false);
 
@@ -27,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
                 })
                 .catch(error => {
-                    console.error('Token verification failed:', error);
+                    console.error('error ', error);
                     setUser(null);
                     setLoggedIn(false);
                 });
@@ -44,7 +43,7 @@ export const AuthProvider = ({ children }) => {
                 setAllApartment(response.data);
             })
             .catch(error => {
-                console.error('Error fetching apartment list:', error);
+                console.error('error', error);
             });
     };
 

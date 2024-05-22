@@ -23,7 +23,7 @@ const MainSection = () => {
     };
 
     if (loading) {
-        return <p>Loading...</p>;
+        return <span className="loading loading-spinner loading-lg"></span>
     }
 
     const divisions = ["Dhaka", "Chittagong", "Khulna", "Rajshahi", "Rangpur", "Sylhet"];

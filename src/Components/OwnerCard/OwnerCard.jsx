@@ -7,9 +7,13 @@ const OwnerCard = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (user && allApartment) {
-            setIsLoading(false);
-        }
+        const fetchData = async () => {
+            if (user && allApartment) {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
     }, [user, allApartment]);
 
     if (isLoading) {

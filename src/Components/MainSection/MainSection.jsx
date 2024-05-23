@@ -23,7 +23,7 @@ const MainSection = () => {
     };
 
     if (loading) {
-        return <span className="loading loading-spinner loading-lg"></span>
+        return <div className='flex justify-center my-16'><span className="loading loading-spinner loading-lg"></span></div>
     }
 
     const divisions = ["Dhaka", "Chittagong", "Khulna", "Rajshahi", "Rangpur", "Sylhet"];

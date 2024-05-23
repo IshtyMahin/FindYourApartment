@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token');
 
         if (token) {
-            console.log('Token from localStorage:', token);
+            console.log('Token:', token);
             axios.get('https://findyourapartmentbackend.onrender.com/api/users/verify-token/', {
                 headers: {
                     'Authorization': `Token ${token}`

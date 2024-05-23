@@ -49,9 +49,9 @@ const UpdateProfile = () => {
             const res =await axios.put(`https://findyourapartmentbackend.onrender.com/api/users/update/${user.id}/`, formData);
             console.log(res);
             setUser(res.data)
-            console.log('User information updated successfully');
+            console.log('success: ',res.data);
         } catch (error) {
-            console.error('Error updating user information:', error);
+            console.error('error:', error);
         }
     };
 

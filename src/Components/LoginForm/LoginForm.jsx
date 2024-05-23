@@ -19,6 +19,10 @@ const LoginForm = () => {
         });
     };
 
+    const handleForRequest = () => {
+        navigate('/request_reset_Password')
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -67,6 +71,10 @@ const LoginForm = () => {
 
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary">Login</button>
+                </div>
+                <div className="text-center mt-4">
+                    <p>Donot have an account? <a className="text-blue-500" href="/register">Register</a></p>
+                    <p>Forgot your password? <button type="button" className="text-blue-500" onClick={handleForRequest}>Reset Password</button></p>
                 </div>
             </form>
         </div>

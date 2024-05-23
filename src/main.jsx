@@ -19,6 +19,8 @@ import ApartmentDetails from './Components/ApartmentDetails/ApatmentDetails.jsx'
 import ProfileCard from './Components/ProfileCard/ProfileCard.jsx';
 import ApartmentUpdateForm from './Components/ApartmentUpdateForm/ApartmentUpdateForm.jsx';
 import UpdateProfile from './Components/UpdateProfile/UpdateProfile.jsx';
+import EmailForRequest from './Components/ResetPassword/EmailForRequest.jsx';
+import SetNewPass from './Components/ResetPassword/SetNewPass.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,9 +59,18 @@ const router = createBrowserRouter([
         element: <LoginForm />
       },
       {
+        path: '/request_reset_Password',
+        element: <EmailForRequest/>
+      },
+      {
+        path: '/reset_password/:uid64/:token',
+        element: <SetNewPass/>
+      },
+      {
         path: '/profile',
         element:  <ProfileCard/>
       },
+
       {
         path: '/profile/update',
         element: <UpdateProfile />

@@ -8,7 +8,6 @@ import SuccessModal from '../ShowModel/ShowModel';
 const ApartmentDetails = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-
     const [apartment, setApartment] = useState(null);
     const [currentSlide, setCurrentSlide] = useState(0); 
     const [isFavorite, setIsFavorite] = useState(false);
@@ -20,18 +19,21 @@ const ApartmentDetails = () => {
     const apartment_id = params.get('id');
 
     useEffect(() => {
-        fetch(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartment_id}`)
-            .then(response => response.json())
-            .then(data => {
-                setApartment(data);
-            })
-            .catch(error => {
+        const fetchApartment = async () => {
+            try {
+                const response = await axios.get(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartment_id}`);
+                setApartment(response.data);
+            } catch (error) {
                 console.error('error', error);
-            });
+            }
+        };
+
+        fetchApartment();
     }, [apartment_id]);
 
+
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchFavoriteApartment = async () => {
             try {
                 const response = await axios.get(`https://findyourapartmentbackend.onrender.com/api/apartment/favorites/?user=${user.id}&apartment=${apartment_id}`);
                 if (response.data.length > 0) {
@@ -43,13 +45,14 @@ const ApartmentDetails = () => {
             }
         };
 
-        fetchData();
+        fetchFavoriteApartment();
     }, [isFavorite]);
 
 
     if (!apartment) {
-        return <span className="loading loading-spinner loading-lg"></span>;
+        return <div className='flex justify-center my-16'><span className="loading loading-spinner loading-lg"></span></div>;
     }
+   
 
     const handlePrev = () => {
         setCurrentSlide((prevSlide) => (prevSlide === 0 ? apartment.images.length - 1 : prevSlide - 1));
@@ -63,7 +66,6 @@ const ApartmentDetails = () => {
         try {
             await axios.delete(`https://findyourapartmentbackend.onrender.com/api/apartment/list/${apartment_id}`)
             navigate('/')
-            // console.log('its okay');
         } catch (error) {
             console.error('error', error);
         }
@@ -72,7 +74,8 @@ const ApartmentDetails = () => {
     const toggleFavorite = async () => {
         try {
             const response = await axios.get(`https://findyourapartmentbackend.onrender.com/api/apartment/favorites/?user=${user.id}&apartment=${apartment_id}`);
-            console.log(response.data);
+            // console.log(response.data);
+
             if (response.data.length > 0) {
                 const favoriteId = response.data[0].id;
                 const deleteFav=await axios.delete(`https://findyourapartmentbackend.onrender.com/api/apartment/favorites/${favoriteId}`);

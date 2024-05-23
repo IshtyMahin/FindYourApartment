@@ -48,7 +48,7 @@ const ApartmentUpdateForm = () => {
     }, [apartment_id,user]);
 
     if (!apartment) {
-        return <span className="loading loading-spinner loading-lg"></span>
+        return <div className='flex justify-center my-16'><span className="loading loading-spinner loading-lg"></span></div>
     }
 
     console.log(apartment);

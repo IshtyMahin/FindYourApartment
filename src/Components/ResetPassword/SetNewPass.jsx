@@ -19,7 +19,7 @@ const SetNewPass = () => {
             setMessage('Passwords do not match');
             return;
         }
-
+        console.log(uid64,token);
         try {
             const response = await axios.post(`https://findyourapartmentbackend.onrender.com/api/users/reset_password_confirm/${uid64}/${token}/`, {
                 new_password: newPassword,

@@ -44,16 +44,13 @@ const EmailForRequest = () => {
                         />
                     </div>
 
-                    
-
-
                 </div>
-
+                <p className="text-center" >{mess}</p>
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary">Request</button>
                 </div>
             </form>
-            <p className="text-center" >{ mess}</p>
+            
         </div>
     );
 };

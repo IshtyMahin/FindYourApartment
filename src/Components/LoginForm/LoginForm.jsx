@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import AuthContext from '../../UseContext/UserProvider';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
+    const [mess,setMess] = useState('')
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -32,8 +33,14 @@ const LoginForm = () => {
             console.log(response.data.token);
             localStorage.setItem('token', response.data.token);
             console.log(localStorage);
-            login(response.data);
-            navigate('/')
+            if (response.data.error) {
+                setMess(response.data.error)
+            }
+            else {
+                login(response.data);
+                navigate('/')
+            }
+            
             console.log('its okay', response.data);
         } catch (error) {
             console.error('error', error.response.data);
@@ -68,15 +75,19 @@ const LoginForm = () => {
                         required
                     />
                 </div>
-
+                <div className='my-2 flex justify-center text-red-700 '>
+                    <p>{mess}</p>
+                </div>
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary">Login</button>
                 </div>
                 <div className="text-center mt-4">
-                    <p>Donot have an account? <a className="text-blue-500" href="/register">Register</a></p>
+                    <p>Donot have an account? <Link className="text-blue-500" to="/register">Register</Link></p>
                     <p>Forgot your password? <button type="button" className="text-blue-500" onClick={handleForRequest}>Reset Password</button></p>
                 </div>
+                
             </form>
+            
         </div>
     );
 };

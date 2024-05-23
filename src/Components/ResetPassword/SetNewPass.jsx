@@ -68,12 +68,12 @@ const SetNewPass = () => {
                         />
                     </div>
                 </div>
-
+                <p className='text-2xl'>{message}</p>
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary">Reset Password</button>
                 </div>
             </form>
-            <p className='text-2xl'>{message}</p>
+           
         </div>
     );
 };

@@ -3,10 +3,12 @@ import { useContext, useState } from 'react';
 import AuthContext from '../../UseContext/UserProvider';
 import FavoriteApartments from '../FavoriteApartment/FavoriteApartment';
 import UpdateProfile from '../UpdateProfile/UpdateProfile';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileCard = () => {
     
-    const { user } = useContext(AuthContext);
+    const { user, loggedIn } = useContext(AuthContext);
+    const navigate = useNavigate()
     const [showFavoriteApartments, setShowFavoriteApartments] = useState(false);
     const [showUpdateForm, setshowUpdateForm] = useState(false);
 
@@ -20,6 +22,10 @@ const ProfileCard = () => {
         setshowUpdateForm(false)
 
     };
+
+    if (!loggedIn) {
+        navigate('/')
+    }
 
     if (!user) {
         return <span className="loading loading-spinner loading-lg"></span>;

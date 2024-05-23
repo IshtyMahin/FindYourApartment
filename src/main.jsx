@@ -59,13 +59,10 @@ const router = createBrowserRouter([
         element: <LoginForm />
       },
       {
-        path: '/request-reset-Password',
+        path: '/request_reset_Password',
         element: <EmailForRequest/>
       },
-      {
-        path: '/reset_password/:uid64/:token',
-        element: <SetNewPass/>
-      },
+      
       {
         path: '/profile',
         element:  <ProfileCard/>
@@ -90,6 +87,11 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: '/reset_password/:uid64/:token',
+    element: <SetNewPass />
+  }
+
 ]);
 
 

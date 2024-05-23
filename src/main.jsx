@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         element: <LoginForm />
       },
       {
-        path: '/request_reset_Password',
+        path: '/request-reset-Password',
         element: <EmailForRequest/>
       },
       {

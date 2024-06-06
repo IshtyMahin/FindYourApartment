@@ -39,7 +39,7 @@ const ApartmentUpdateForm = () => {
                     size: data.size,
                     description: data.description,
                     owner_id: user.id,
-                    uploaded_images:[],
+                    uploaded_images: data.images,
                 })
             })
             .catch(error => {
@@ -51,6 +51,7 @@ const ApartmentUpdateForm = () => {
         return <div className='flex justify-center my-16'><span className="loading loading-spinner loading-lg"></span></div>
     }
 
+    console.log(formData);
     console.log(apartment);
 
     
@@ -63,11 +64,29 @@ const ApartmentUpdateForm = () => {
         });
     };
 
-    const handleImageChange = (e) => {
-        const images = e.target.files;
+    const handleImageChange = async (e) => {
+        const files = e.target.files;
+        const urls = [];
+
+        for (let i = 0; i < files.length; i++) {
+            const formData = new FormData();
+            formData.append('image', files[i]);
+
+            try {
+                const response = await axios.post('https://api.imgbb.com/1/upload', formData, {
+                    params: {
+                        key: 'dccf78e1bf130f4292eb12620c826d79',
+                    },
+                });
+                urls.push(response.data.data.url);
+            } catch (error) {
+                console.error('Error uploading image to ImgBB', error);
+            }
+        }
+
         setFormData({
             ...formData,
-            uploaded_images: images,
+            uploaded_images: urls,
         });
     };
 
@@ -83,9 +102,9 @@ const ApartmentUpdateForm = () => {
         postData.append('description', formData.description);
         postData.append('owner_id', formData.owner_id);
 
-        for (let i = 0; i < formData.uploaded_images.length; i++) {
-            postData.append('uploaded_images', formData.uploaded_images[i]);
-        }
+        formData.uploaded_images.forEach((url, index) => {
+            postData.append(`uploaded_images[${index}]`, url);
+        });
 
         console.log(postData);
 
@@ -146,7 +165,7 @@ const ApartmentUpdateForm = () => {
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700">Images:</label>
-                    <input type="file" name="uploaded_images" onChange={handleImageChange} className="file-input file-input-bordered w-full" multiple required />
+                    <input type="file" name="uploaded_images" onChange={handleImageChange} className="file-input file-input-bordered w-full" multiple required/>
                 </div>
                 <div className="text-center">
                     <button type="submit" className="btn btn-primary">Update Apartment</button>

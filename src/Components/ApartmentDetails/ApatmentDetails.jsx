@@ -99,7 +99,7 @@ const ApartmentDetails = () => {
         <div className=" top-0 left-0  w-full h-full bg-slate-300 bg-opacity-90 z-50 flex justify-center items-center">
             <div className="max-w-4xl w-full my-16 bg-white p-8 rounded-lg shadow-xl overflow-hidden">
                 <div className="carousel relative">
-                    <img src={apartment.images[currentSlide]?.image} className="w-full" alt={`Slide ${currentSlide + 1}`} />
+                    <img src={apartment.images[currentSlide]?.image_url} className="w-full" alt={`Slide ${currentSlide + 1}`} />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                         <button onClick={handlePrev} className="btn btn-circle">❮</button>
                         <button onClick={handleNext} className="btn btn-circle">❯</button>

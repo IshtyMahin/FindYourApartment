@@ -70,6 +70,7 @@ const ApartmentForm = () => {
         });
 
         try {
+            console.log(postData)
             const response = await axios.post('https://findyourapartmentbackend.onrender.com/api/apartment/list/', postData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',

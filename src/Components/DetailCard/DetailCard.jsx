@@ -39,7 +39,7 @@ const DetailCard = ({ apartment }) => {
         <div className={`card lg:card-side bg-base-100 shadow-xl container mx-auto`}>
             {showModal && <LoginModal closeModal={closeModal} value="You need to log in to view for apartments details." />}
             <div className="carousel md:w-1/2 relative">
-                <img src={images[currentSlide]?.image} className="w-full" alt={`Slide ${currentSlide + 1}`} />
+                <img src={images[currentSlide]?.image_url} className="w-full" alt={`Slide ${currentSlide + 1}`} />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                     <button onClick={handlePrev} className="btn btn-circle">❮</button>
                     <button onClick={handleNext} className="btn btn-circle">❯</button>

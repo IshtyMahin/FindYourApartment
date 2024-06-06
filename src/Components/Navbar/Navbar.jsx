@@ -5,6 +5,7 @@ import './Navbar.css';
 
 const Navbar = () => {
     const { user, loggedIn, logout } = useContext(AuthContext);
+    console.log(user)
     const [showDropdown, setShowDropdown] = useState(false);
 
     const toggleDropdown = () => {

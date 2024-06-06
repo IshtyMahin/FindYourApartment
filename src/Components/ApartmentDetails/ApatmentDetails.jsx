@@ -7,6 +7,7 @@ import SuccessModal from '../ShowModel/ShowModel';
 
 const ApartmentDetails = () => {
     const { user } = useContext(AuthContext);
+    
     const navigate = useNavigate();
     const [apartment, setApartment] = useState(null);
     const [currentSlide, setCurrentSlide] = useState(0); 

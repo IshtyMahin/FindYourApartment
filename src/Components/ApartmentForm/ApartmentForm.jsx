@@ -27,11 +27,29 @@ const ApartmentForm = () => {
         });
     };
 
-    const handleImageChange = (e) => {
-        const images = e.target.files;
+    const handleImageChange = async (e) => {
+        const files = e.target.files;
+        const urls = [];
+
+        for (let i = 0; i < files.length; i++) {
+            const formData = new FormData();
+            formData.append('image', files[i]);
+
+            try {
+                const response = await axios.post('https://api.imgbb.com/1/upload', formData, {
+                    params: {
+                        key: 'dccf78e1bf130f4292eb12620c826d79', 
+                    },
+                });
+                urls.push(response.data.data.url);
+            } catch (error) {
+                console.error('Error uploading image to ImgBB', error);
+            }
+        }
+
         setFormData({
             ...formData,
-            uploaded_images: images,
+            uploaded_images: urls,
         });
     };
 
@@ -47,9 +65,9 @@ const ApartmentForm = () => {
         postData.append('description', formData.description);
         postData.append('owner_id', formData.owner_id);
 
-        for (let i = 0; i < formData.uploaded_images.length; i++) {
-            postData.append('uploaded_images', formData.uploaded_images[i]);
-        }
+        formData.uploaded_images.forEach((url, index) => {
+            postData.append(`uploaded_images[${index}]`, url);
+        });
 
         try {
             const response = await axios.post('https://findyourapartmentbackend.onrender.com/api/apartment/list/', postData, {
@@ -58,11 +76,11 @@ const ApartmentForm = () => {
                 },
             });
 
-            setAllApartment(...allApartment, response.data)
-            navigate('/')
-            console.log('its okay:', response.data);
+            setAllApartment([...allApartment, response.data]);
+            navigate('/');
+            console.log('Apartment created:', response.data);
         } catch (error) {
-            console.error('error', error);
+            console.error('Error creating apartment', error);
         }
     };
 
